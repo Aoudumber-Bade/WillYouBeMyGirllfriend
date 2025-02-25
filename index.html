@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="language" content="en-US">
+  <meta name="title" content="Will You Be My Girlfriend | Aoudumber Bade">
+  <meta name="github" content="https://github.com/Aoudumber-Bade">
+  <link type="text/css" rel="stylesheet" href="css/theme.css" />
+  <script src="js/jquery-2.0.3.min.js"></script>
+  <title>Will You Be My Girlfriend 💗| Aoudumber Bade</title>
+</head>
+
+<body>
+  <div id="div_container">
+    <!-- Outer div, used for centering, compatible with PC and mobile -->
+    <div id="div_start_bg"></div>
+    <div id="div_onlyyou">
+      <!-- Used for setting background -->
+      <div id="div_oy_inner">
+        <!-- Used to store content -->
+        <div class="div_oy_text">
+          <h1></h1>
+          <img class="img_oy_text" src="" />
+          <p class="p_oy_text"></p>
+          <div></div>
+
+          <ul id="ul_oy_benefit">
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+            <li class="li_oy_benefit"></li>
+          </ul>
+        </div>
+        <ul id="ul_oy_btn">
+          <li onclick="oy_go_next()" style="    background-color: rgb(0 169 38 / 65%);">Yes&nbsp;&nbsp;❤</li>
+          <li onclick="oy_show_benefit()" style="background: red;">No&nbsp;&nbsp;✖</li>
+        </ul>
+        <div id="div_oy_note" onclick="oy_hide_note()">
+          <img src="./images/image2.gif" alt="" /><br />Please say Yes!
+          <div id="div_oy_note_close" >✖</div>
+        </div>
+        <div id="div_oy_yes">
+          <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="" /><br />That's great! Haha~
+        </div>
+      </div>
+    </div>
+    <div class="div_pure_words">
+      <div class="div_pure_words_bg">
+        <div class="div_pure_words_height"></div>
+      </div>
+      <div class="div_pw_typed">
+        <span id="span_pw_typed"></span>
+      </div>
+    </div>
+    <div id="div_btn_container">
+      <div id="div_btn_inner">
+        <div class="div_music_tips"></div>
+        <div class="div_btn" id="div_music" onclick="music_switch()">
+          <!-- Music button section -->
+          <img id="img_music" src="images/music_note_big.png"
+            style="-webkit-animation: music_play_rotate 1s linear infinite;" />
+          <!-- Your browser does not support playing music -->
+          <audio id="audio_music" autoplay="autoplay" loop="loop">
+            <source type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="div_record_tips"></div>
+        <div class="div_btn" id="div_record" onclick="record_switch()">
+          <audio id="media" src="/music.mp3" autoplay loop preload="auto"></audio>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Determine client device, choose to write meta tag
+    function init_viewport() {
+      if (navigator.userAgent.indexOf("Android") != -1) {
+        var version = parseFloat(RegExp.$1);
+        if (version > 2.3) {
+          var width = window.outerWidth == 0 ? window.screen.width : window.outerWidth;
+          var phoneScale = parseInt(width) / 500;
+          document.write(
+            '<meta name="viewport" content="width=500, minimum-scale = ' +
+            phoneScale +
+            ", maximum-scale = " +
+            phoneScale +
+            ', target-densitydpi=device-dpi">'
+          );
+        } else {
+          document.write(
+            '<meta name="viewport" content="width=500, target-densitydpi=device-dpi, user-scalable=0">'
+          );
+        }
+      } else if (navigator.userAgent.indexOf("iPhone") != -1) {
+        var phoneScale = parseInt(window.screen.width) / 500;
+        document.write(
+          '<meta name="viewport" content="width=500, min-height=750, initial-scale=' +
+          phoneScale +
+          ", maximum-scale=" +
+          phoneScale +
+          ', user-scalable=0" /> '
+        ); //0.75   0.82
+      } else {
+        document.write(
+          '<meta name="viewport" content="width=500, height=750, initial-scale=0.64" /> '
+        ); //0.75  0.82
+      }
+    }
+    init_viewport();
+
+    var theme = "pure_words";
+    console.log("theme ->" + theme);
+    var theme_content = {
+      pure_words_content:
+        "Meeting you is the beginning of all my beautiful stories. The moment I laid eyes on you, God whispered four words in my ear: 'No escape from destiny!'\nI may have missed your past, but I will definitely stand by you through your future!\nI love you!<um style='color: #F44336;'>💕</um>",
+      typed_bool: "typed_y",
+      cursor_char: "cursor_heart",
+      bg_style_pure_words: "bg_opacity",
+      bg_img: "images/3.jpg",
+      simple_page_content: "",
+      video_page_content: "",
+    };
+    console.log(theme_content);
+
+    var music_json = {
+      music_select: "m_online",
+      m_online_id: "7",
+      m_online_url: "images/1.mp3",
+      m_upload_name: "null",
+      m_upload_url: "null",
+    };
+    console.log(music_json);
+    var record_json = {
+      record_bool: "r_false",
+      r_wechat_time: "null",
+      r_wechat_url: "null",
+      r_wechat_amr: "null",
+    };
+    console.log(record_json);
+
+    var main_title = "I like you❤️";
+
+    // console.log(main_title);
+    if (main_title == "" || main_title == "null") {
+      // Allow title to be empty
+      document.title = "Falling for You Slowly";
+    }
+
+    var window_height = $(window).height();
+    console.log("window_height ->" + window_height);
+    var pure_words_content = theme_content["pure_words_content"];
+    var str_cursorChar;
+    var typed_bool;
+    var interval_pw_height;
+    var height_div_pw = $(".div_pure_words_height").height();
+    function init_pure_words() {
+      $(".div_pure_words_height").html(pure_words_content + "22222"); // Initialize copied content to extend the document height
+      // Initialize background image for the div
+      if (
+        typeof theme_content["bg_style_pure_words"] != "undefined" &&
+        theme_content["bg_style_pure_words"] == "bg_opacity"
+      ) {
+        if (
+          typeof theme_content["bg_img"] != "undefined" &&
+          theme_content["bg_img"] != ""
+        ) {
+          $(".div_pure_words_bg").css({
+            "background-image": "url(" + theme_content["bg_img"] + ")",
+          });
+        }
+      }
+      // Below is the typing effect JS
+      if (
+        typeof theme_content["cursor_char"] != "undefined" &&
+        theme_content["cursor_char"] != ""
+      ) {
+        switch (
+        theme_content["cursor_char"] // Set the style for the typing cursor
+        ) {
+          case "cursor_heart":
+            str_cursorChar = '<um style="color: #F44336;">❤</um>';
+            break;
+          case "cursor_sub":
+            str_cursorChar = "_";
+            break;
+          case "cursor_music":
+            str_cursorChar = "♫";
+            break;
+          case "cursor_star":
+            str_cursorChar = "★";
+            break;
+          case "cursor_sun":
+            str_cursorChar = "☀";
+            break;
+          default:
+            str_cursorChar = "|";
+        }
+      } else {
+        // Handle brand new work, default show typing effect
+        str_cursorChar = "❤";
+      }
+      // Determine whether the user has chosen the typing effect
+      if (
+        typeof theme_content["typed_bool"] != "undefined" &&
+        theme_content["typed_bool"] != ""
+      ) {
+        typed_bool = theme_content["typed_bool"] == "typed_y" ? true : false;
+      } else {
+        typed_bool = false; // Default show typing effect
+      }
+      display_pure_words();
+      $(".div_pure_words").fadeIn();
+      interval_pw_height = setInterval(function () {
+        console.log(
+          "div_pure_words_height -> " + $(".div_pure_words_height").height()
+        );
+        var least_height_div_pw = $(".div_pure_words_height").height();
+        if (least_height_div_pw > height_div_pw) {
+          height_div_pw = least_height_div_pw;
+        } else {
+          clearInterval(interval_pw_height);
+          $(".div_pure_words_height").height(least_height_div_pw + 100);
+          if ($(".div_pure_words_height").height() < window_height) {
+            $(".div_pure_words_height").height(window_height); // Cannot be smaller than the window's height
+            console.log("let us be high as window");
+          }
+        }
+      }, 100);
+    }
+
+    function display_pure_words() {
+      if (typed_bool) {
+        var typed_pure_words = new Typed("#span_pw_typed", {
+          strings: [pure_words_content],
+          // Input content, supports HTML tags
+          typeSpeed: 120,
+          // Typing speed
+          cursorChar: str_cursorChar,
+          // Replace the style of the cursor
+          contentType: "html",
+          // When contentType is html, the printed text tags are directly parsed as HTML
+          onComplete: function (abc) {
+            // console.log(abc);
+            console.log("finished typing words");
+            // console.log($('#span_pw_typed').height()-$(".div_pure_words_height").height());
+          },
+        });
+      } else {
+        // If typing effect is not needed, just display directly
+        $("#span_pw_typed").html(pure_words_content).fadeIn();
+      }
+      init_attachment();
+    }
+    var start_content = {
+      chase_title:
+        "Will you be my girlfriend<um style='color: #F44336;'>!</um>",
+      chase_text:
+        "Ever since you appeared, I've liked you for many years, and I hope that from now on, you will use my name to turn everyone down<um style='color: #F44336;'>💕</um>",
+      chase_benefit: [
+        "You're the one I want to kiss even if I have to pull out the oxygen tank",
+        "You're the person I want to hug even after running 8000 meters",
+        "You're the secret I wouldn't dare reveal even after punishing myself with three drinks",
+        "You're the passion I wouldn't let go of, even if I had to brave fire and water",
+        "You're the one I'd still reply to even when my battery is at 1%",
+        "You're the dream I never want to wake up from",
+      ],
+      bg_style: "bg_custom",
+      bg_img: "images/2.jpg",
+      img_bool: "img_true",
+      img_src: "images/1.gif",
+    }; // possibly null
+    console.log(start_content);
+    var start_id;
+    $(function () {
+      // This event triggers interactive creativity
+      start_id = "onlyyou"; // possibly null
+      init_start(start_id);
+    });
+    function init_start(start_id) {
+      console.log("init_start ->" + start_id);
+      switch (start_id) {
+        case "loveformat":
+          $(".div_loveformat").show();
+          init_loveformat();
+          break;
+        case "hearttree":
+          $("#div_hearttree").show();
+          init_hearttree();
+          break;
+        case "courage":
+          $("#div_courage").show();
+          init_courage();
+          break;
+        case "birthdaycake":
+          $("#div_dbcake").show();
+          init_birthdaycake();
+          break;
+        case "intersect":
+          $("#div_intersect").show();
+          init_intersect();
+          break;
+        case "onlyyou":
+          $("#div_onlyyou").show();
+          init_onlyyou();
+          break;
+        default:
+          init_theme();
+      }
+    }
+    // Start main animation part
+    function init_theme() {
+      console.log("init_theme");
+      $("#div_start_bg").fadeOut();
+      init_pure_words();
+    }
+    var attachment = "null"; // possibly null
+    var attached_content = {
+      bool_save: false,
+    }; // possibly null
+    console.log(attached_content);
+
+    function init_attachment() {
+      // Start attachment
+      console.log("init_attachment ->" + attachment);
+      switch (attachment) {
+        case "timer":
+          init_at_timer();
+          break;
+        default:
+          return;
+      }
+    }
+  </script>
+  <!-- JQuery -->
+  <script src="js/typed.min.js"></script>
+  <script src="js/start_onlyyou.js"></script>
+  <script src="js/jweixin-1.2.0.js"></script>
+  <script src="js/theme_common.js"></script>
+</body>
+</html>
